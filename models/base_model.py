@@ -3,17 +3,30 @@
 
 import uuid
 from datetime import datetime
-import models
 
 
 class BaseModel:
     """A Base Model class"""
 
-    def __init__(self):
-        """Initializing the BaseModel instance"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """Initializing the BaseModel instance
+        Args: args - Tuple of class instance arguments
+              kwargs - Dictionary of class instance arguments 
+        """
+        if kwargs:
+            if 'created_at' in kwargs:
+                kwargs['created_at'] = datetime.strptime(
+                        kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
+            if 'update_at' in kwargs:
+                kwargs['updated_at'] = datetime.strptime(
+                        kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """Returns the string representation of the BaseModel instance"""
