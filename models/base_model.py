@@ -8,8 +8,11 @@ from datetime import datetime
 class BaseModel:
     """A Base Model class"""
 
-    def __init__(self):
-        """Initializing the BaseModel instance"""
+    def __init__(self, *args, **kwargs):
+        """Initializing the BaseModel instance
+        Args: args - Tuple of class instance arguments
+              kwargs - Dictionary of class instance arguments 
+        """
         if kwargs:
             if 'created_at' in kwargs:
                 kwargs['created_at'] = datetime.strptime(
