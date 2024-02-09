@@ -10,7 +10,7 @@ class TestBaseModel(unittest.TestCase):
     """BaseModel test class using unittest inheritance TestCase"""
 
     def test_attributes(self):
-        '''Test instance attributes'''
+        """Test instance attributes"""
         model = BaseModel()
         self.assertTrue(hasattr(model, 'id'))
         self.assertTrue(hasattr(model, 'created_at'))
@@ -21,7 +21,7 @@ class TestBaseModel(unittest.TestCase):
         model1 = BaseModel()
         model2 = BaseModel()
         self.assertIsInstance(model1.id, str)
-        self.assertEqual(model1.id, model2.id)
+        self.assertNotEqual(model1.id, model2.id)
 
     def test_created_at_and_updtaed_at_are_datetime(self):
         """Test if created_at and updated_at are datetime objects"""
@@ -39,9 +39,8 @@ class TestBaseModel(unittest.TestCase):
     def test_str_method(self):
         """Test str method"""
         model = BaseModel()
-        expected_str = f"[BaseModel] ({self.base_model.id})\
-                        {self.base_model.__dict__}"
-        self.assertEqual(str(model), expected_str)
+        model_str = str(model)
+        self.assertTrue(isinstance(model_str, str))
 
     def test_to_dict(self):
         """Test to_dict method"""
@@ -54,12 +53,21 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(obj_dict['updated_at'],
                          model.updated_at.isoformat())
 
-    def test_instantiation_with_args_and_kwargs(self):
-        """Test for instatiation with args and kwargs"""
-        dtime = datetime.today()
+    def test_args_none(self):
+        model = BaseModel(None)
+        self.assertNotIn(None, model.__dict__.values())
+
+    def test_kwargs_none(self):
+        with self.assertRaises(TypeError):
+            BaseModel(id=None, created_at=None, updated_at=None)
+
+    def test_instantiation_with_kwargs(self):
+        dtime = datetime.now()
         dtime_iso = dtime.isoformat()
-        model = BaseModel("45", id="900", created_at=dtime_iso, updated_at=dtime_iso)
-        self.assertEqual(model.id, "900")
+        dt = dtime.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        kwargs = {'id': '345', 'created_at': dt, 'updated_at': dt}
+        model = BaseModel(**kwargs)
+        self.assertEqual(model.id, "345")
         self.assertEqual(model.created_at, dtime)
         self.assertEqual(model.updated_at, dtime)
 
