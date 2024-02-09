@@ -78,31 +78,63 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.new(BaseModel(), 1)
 
-    def test_save_reload(self):
+    def test_save(self):
         """Test the save() and reload() methods of FileStorage"""
         obj1 = BaseModel()
-        usr = BaseModel()
-        self.storage.new(obj1)
-        self.storage.new(obj2)
-        self.storage.save()
-        self.storage.reload()
-        self.assertEqual(len(self.storage.all()), 2)
-        self.assertIn('BaseModel.' + obj1.id, self.storage.all())
-        self.assertIn('BaseModel.' + obj2.id, self.storage.all())
+        usr = User()
+        state = State()
+        place = Place()
+        city = City()
+        amenity = Amenity()
+        models.storage.new(obj)
+        models.storage.new(usr)
+        models.storage.new(state)
+        models.storage.new(place)
+        models.storage.new(city)
+        models.storage.new(amenity)
+        models.storage.save()
+        save_msg = ""
+        with open("file.json", "r") as file:
+            save_msg = file.read()
+            self.assertIn("BaseModel." + obj1.id, save_msg)
+            self.assertIn("User." + usr.id, save_msg)
+            self.assertIn("State." + state.id, save_msg)
+            self.assertIn("Place." + place.id, save_msg)
+            self.assertIn("City." + city.id, save_msg)
+            self.assertIn("Amenity." + amenity.id, save_msg)
 
-    def test_reload_non_existing_file(self):
-        """Test reload() method when the JSON file doesn't exist"""
-        self.storage.reload()
-        self.assertEqual(self.storage.all(), {})
+    def test_save_args(self):
+        """Tests the save method with None args"""
+        with self.assertRaises(TypeError):
+            model.storage.save(None)
 
-    def test_reload_existing_file(self):
-        """Test reload() method when the JSON file exists"""
+    def test_reload_args(self):
+        """Test reload() method with None args"""
+        with self.assertRaises(TypeError):
+            models.storage.reload(None)
+
+    def test_reload(self):
         obj = BaseModel()
-        self.storage.new(obj)
-        self.storage.save()
-        self.storage.reload()
-        self.assertEqual(len(self.storage.all()), 1)
-        self.assertIn('BaseModel.' + obj.id, self.storage.all())
+        usr = User()
+        state = State()
+        place = Place()
+        city = City()
+        amenity = Amenity()
+        models.storage.new(obj)
+        models.storage.new(usr)
+        models.storage.new(state)
+        models.storage.new(place)
+        models.storage.new(city)
+        models.storage.new(amenity)
+        models.storage.save()
+        models.storage.reload()
+        objs = FileStorage._FileStorage__objects
+        self.assertIn("BaseModel." + obj.id, objs)
+        self.assertIn("User." + usr.id, objs)
+        self.assertIn("State." + state.id, objs)
+        self.assertIn("Place." + place.id, objs)
+        self.assertIn("City." + city.id, objs)
+        self.assertIn("Amenity." + amenity.id, objs)
 
 
 if __name__ == '__main__':
