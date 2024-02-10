@@ -52,11 +52,11 @@ class FileStorage:
         Reloads the storage dictionary from the JSON file.
         """
         try:
-            with open(FileStorage.__file_path) as myfile:
+            with open(cls.__file_path, 'r') as myfile:
                 objdict = json.load(myfile)
                 for o in objdict.values():
                     cls_name = o["__class__"]
                     del o["__class__"]
-                    self.new(eval(cls_name)(**o))
+                    cls.new(eval(cls_name)(**o))
         except FileNotFoundError:
             return
