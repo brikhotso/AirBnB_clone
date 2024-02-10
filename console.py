@@ -36,12 +36,14 @@ def generate_class_methods(class_name):
         """Updates an instance of {class_name}"""
         self.do_update(f"{class_name} {arg}")
 
-    return do_create_instance, do_show_instance, do_destroy_instance, do_all_instances, do_update_instance
+    return (do_create_instance, do_show_instance, do_destroy_instance,
+            do_all_instances, do_update_instance)
 
 
 def add_class_methods(cls):
     for class_name in ["User", "Place", "State", "City", "Amenity", "Review"]:
-        create_method, show_method, destroy_method, all_method, update_method = generate_class_methods(class_name)
+        (create_method, show_method, destroy_method,
+         all_method, update_method) = generate_class_methods(class_name)
         setattr(cls, f"do_create_{class_name.lower()}", create_method)
         setattr(cls, f"do_show_{class_name.lower()}", show_method)
         setattr(cls, f"do_destroy_{class_name.lower()}", destroy_method)
@@ -202,7 +204,6 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program. Usage: Ctrl-D"""
         print("")
         return True
-
 
 
 if __name__ == '__main__':
