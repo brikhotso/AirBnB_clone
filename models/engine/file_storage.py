@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Contains file storage"""
+"""Contains file storage"""
 
 import json
 from models.base_model import BaseModel
@@ -15,7 +15,6 @@ class FileStorage:
     """
     Class for serializing and deserializing objects to and from a JSON file.
     """
-
     __file_path = "file.json"
     __objects = {}
 
