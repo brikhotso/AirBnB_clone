@@ -1,9 +1,14 @@
 #!/usr/bin/python3
+""" contains file storage and related methods"""
 
 import json
 from models.base_model import BaseModel
 from models.user import User
-
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class FileStorage:
     """
@@ -49,9 +54,8 @@ class FileStorage:
         try:
             with open(cls.__file_path, 'r') as myfile:
                 objdict = json.load(myfile)
-                for o in objdict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    cls.new(eval(cls_name)(**o))
+                for key, value in objdict.items():
+                    class_name, obj_id = key.split('.')
+                    cls.__objects[key] = eval(class_name)(**value)
         except FileNotFoundError:
             return
