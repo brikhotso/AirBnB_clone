@@ -81,6 +81,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(amenity, models.storage.all().values())
 
     def test_new_args(self):
+        """Test new args"""
         with self.assertRaises(TypeError):
             models.storage.new(BaseModel(), 1)
 
@@ -120,6 +121,7 @@ class TestFileStorage(unittest.TestCase):
             models.storage.reload(None)
 
     def test_reload(self):
+        """Test reload method"""
         obj = BaseModel()
         usr = User()
         state = State()

@@ -54,14 +54,17 @@ class TestBaseModel(unittest.TestCase):
                          model.updated_at.isoformat())
 
     def test_args_none(self):
+        """Test instantiation with None args"""
         model = BaseModel(None)
         self.assertNotIn(None, model.__dict__.values())
 
     def test_kwargs_none(self):
+        """Test instantiation with None kwargs"""
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
 
     def test_instantiation_with_kwargs(self):
+        """Test instantiation with kwargs"""
         dtime = datetime.now()
         dtime_iso = dtime.isoformat()
         dt = dtime.strftime('%Y-%m-%dT%H:%M:%S.%f')
