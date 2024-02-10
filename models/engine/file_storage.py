@@ -2,6 +2,8 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User
+
 
 class FileStorage:
     """
@@ -11,13 +13,15 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    @classmethod
+    def all(cls):
         """
         Returns a dictionary containing all objects.
         """
-        return self.__objects
+        return cls.__objects
 
-    def new(self, obj):
+    @classmethod
+    def new(cls, obj):
         """
         Adds a new object to the storage dictionary.
 
@@ -25,23 +29,25 @@ class FileStorage:
             obj: An instance of a class inheriting from BaseModel.
         """
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        cls.__objects[key] = obj
 
-    def save(self):
+    @classmethod
+    def save(cls):
         """
         Saves objects in the storage dictionary to a JSON file.
         """
         serialized_objects = {key: obj.to_dict() for key,
-                              obj in self.__objects.items()}
-        with open(self.__file_path, 'w', encoding='utf-8') as myfile:
+                              obj in cls.__objects.items()}
+        with open(cls.__file_path, 'w', encoding='utf-8') as myfile:
             json.dump(serialized_objects, myfile)
 
-    def reload(self):
+    @classmethod
+    def reload(cls):
         """
         Reloads the storage dictionary from the JSON file.
         """
         try:
-            with open(self.__file_path) as myfile:
+            with open(cls.__file_path, 'r') as myfile:
                 objdict = json.load(myfile)
                 for o in objdict.values():
                     cls_name = o["__class__"]
