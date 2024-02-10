@@ -29,7 +29,11 @@ def generate_class_methods(class_name):
 
     def do_all_instances(self, arg):
         """Shows all instances of {class_name}"""
-        self.do_all(f"{class_name} {arg}")
+        if arg == '':
+            print([str(obj) for obj in storage.all()
+                   .values() if type(obj).__name__ == class_name])
+        else:
+            print("** class doesn't exist **")
 
     def do_update_instance(self, arg):
         """Updates an instance of {class_name}"""
