@@ -29,11 +29,7 @@ def generate_class_methods(class_name):
 
     def do_all_instances(self, arg):
         """Shows all instances of {class_name}"""
-        if arg == '':
-            print([str(obj) for obj in storage.all()
-                   .values() if type(obj).__name__ == class_name])
-        else:
-            print("** class doesn't exist **")
+        self.do_all(f"{class_name} {arg}")
 
     def do_update_instance(self, arg):
         """Updates an instance of {class_name}"""
@@ -159,6 +155,7 @@ class HBNBCommand(cmd.Cmd):
 
         print([str(instance) for key, instance in
                storage.all().items() if arg in key])
+
 
     def do_update(self, arg):
         """Updates an instance based on class name and id"""
