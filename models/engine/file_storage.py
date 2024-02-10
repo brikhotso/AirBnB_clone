@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ contains file storage and related methods"""
-
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -9,6 +8,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+
 
 class FileStorage:
     """
@@ -52,14 +52,11 @@ class FileStorage:
         Reloads the storage dictionary from the JSON file.
         """
         try:
-            with open(cls.__file_path, 'r') as myfile:
+            with open(FileStorage.__file_path) as myfile:
                 objdict = json.load(myfile)
-                for key, value in objdict.items():
-                    class_name, obj_id = key.split('.')
-                    # Dynamically create instances based on class_name
-                    if class_name == 'User':
-                        cls.__objects[key] = User(**value)
-                    else:
-                        cls.__objects[key] = eval(class_name)(**value)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
         except FileNotFoundError:
             return
