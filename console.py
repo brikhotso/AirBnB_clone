@@ -5,8 +5,52 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
+def generate_class_methods(class_name):
+    """Generates methods for actions with a specific class"""
+
+    def do_create_instance(self, arg):
+        """Creates a new instance of {class_name}"""
+        self.do_create(f"{class_name} {arg}")
+
+    def do_show_instance(self, arg):
+        """Shows an instance of {class_name}"""
+        self.do_show(f"{class_name} {arg}")
+
+    def do_destroy_instance(self, arg):
+        """Deletes an instance of {class_name}"""
+        self.do_destroy(f"{class_name} {arg}")
+
+    def do_all_instances(self, arg):
+        """Shows all instances of {class_name}"""
+        self.do_all(f"{class_name} {arg}")
+
+    def do_update_instance(self, arg):
+        """Updates an instance of {class_name}"""
+        self.do_update(f"{class_name} {arg}")
+
+    return do_create_instance, do_show_instance, do_destroy_instance, do_all_instances, do_update_instance
+
+
+def add_class_methods(cls):
+    for class_name in ["User", "Place", "State", "City", "Amenity", "Review"]:
+        create_method, show_method, destroy_method, all_method, update_method = generate_class_methods(class_name)
+        setattr(cls, f"do_create_{class_name.lower()}", create_method)
+        setattr(cls, f"do_show_{class_name.lower()}", show_method)
+        setattr(cls, f"do_destroy_{class_name.lower()}", destroy_method)
+        setattr(cls, f"do_all_{class_name.lower()}", all_method)
+        setattr(cls, f"do_update_{class_name.lower()}", update_method)
+    return cls
+
+
+@add_class_methods
 class HBNBCommand(cmd.Cmd):
     """Define HBNB command interpreter"""
 
@@ -18,18 +62,20 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel"""
-        if not arg:
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
             return
 
-        try:
-            cls = eval(arg)
-        except NameError:
+        class_name = args[0]
+        if class_name not in ["BaseModel", "User", "Place",
+                              "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
             return
-        instance = cls()
-        instance.save()
-        print(instance.id)
+
+        new_instance = eval(class_name)()
+        new_instance.save()
+        print(new_instance.id)
 
     def do_show(self, arg):
         """Prints the string representation of an instance based
@@ -156,6 +202,7 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program. Usage: Ctrl-D"""
         print("")
         return True
+
 
 
 if __name__ == '__main__':
