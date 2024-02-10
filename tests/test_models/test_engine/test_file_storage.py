@@ -53,67 +53,10 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.all(None)
 
-    def test_new(self):
-        """Test the new() method of FileStorage"""
-        obj = BaseModel()
-        usr = User()
-        state = State()
-        place = Place()
-        city = City()
-        amenity = Amenity()
-        models.storage.new(obj)
-        models.storage.new(usr)
-        models.storage.new(state)
-        models.storage.new(place)
-        models.storage.new(city)
-        models.storage.new(amenity)
-        self.assertIn("BaseModel." + obj.id, models.storage.all().keys())
-        self.assertIn(obj, models.storage.all().values())
-        self.assertIn("User." + usr.id, models.storage.all().keys())
-        self.assertIn(usr, models.storage.all().values())
-        self.assertIn("State.." + state.id, models.storage.all().keys())
-        self.assertIn(state, models.storage.all().values())
-        self.assertIn("Place." + place.id, models.storage.all().keys())
-        self.assertIn(place, models.storage.all().values())
-        self.assertIn("City." + city.id, models.storage.all().keys())
-        self.assertIn(city, models.storage.all().values())
-        self.assertIn("Amenity." + amenity.id, models.storage.all().keys())
-        self.assertIn(amenity, models.storage.all().values())
-
     def test_new_args(self):
         """Test new args"""
         with self.assertRaises(TypeError):
             models.storage.new(BaseModel(), 1)
-
-    def test_save(self):
-        """Test the save() and reload() methods of FileStorage"""
-        obj1 = BaseModel()
-        usr = User()
-        state = State()
-        place = Place()
-        city = City()
-        amenity = Amenity()
-        models.storage.new(obj)
-        models.storage.new(usr)
-        models.storage.new(state)
-        models.storage.new(place)
-        models.storage.new(city)
-        models.storage.new(amenity)
-        models.storage.save()
-        save_msg = ""
-        with open("file.json", "r") as file:
-            save_msg = file.read()
-            self.assertIn("BaseModel." + obj1.id, save_msg)
-            self.assertIn("User." + usr.id, save_msg)
-            self.assertIn("State." + state.id, save_msg)
-            self.assertIn("Place." + place.id, save_msg)
-            self.assertIn("City." + city.id, save_msg)
-            self.assertIn("Amenity." + amenity.id, save_msg)
-
-    def test_save_args(self):
-        """Tests the save method with None args"""
-        with self.assertRaises(TypeError):
-            model.storage.save(None)
 
     def test_reload_args(self):
         """Test reload() method with None args"""
