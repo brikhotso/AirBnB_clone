@@ -4,6 +4,7 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Define HBNB command interpreter"""
 
@@ -97,6 +98,20 @@ class HBNBCommand(cmd.Cmd):
 
         del instance[key]
         storage.save()
+
+    def do_all(self, arg):
+        """Prints all string representation of all instances"""
+        if not arg:
+            print([str(instance) for instance in storage.all().values()])
+            return
+
+        try:
+            cls = eval(arg)
+        except NameError:
+            print("** class doesn't exist **")
+            return
+
+        print([str(instance) for key, instance in storage.all().items() if arg in key])
 
 
 if __name__ == '__main__':
