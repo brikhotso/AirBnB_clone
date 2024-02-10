@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel
 
+
 class Amenity(BaseModel):
     """Amenity class inheriting from BaseModel"""
 
@@ -15,4 +16,4 @@ class Amenity(BaseModel):
             **kwargs: Dictionary of class instance arguments
         """
         super().__init__(*args, **kwargs)
-        self.name = kwargs.get('name', '')
+        self.name = ""
