@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Defines entry point of the command interpreter."""
 
 import cmd
 import shlex
@@ -14,14 +15,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing when an empty line is entered."""
         pass
-
-    def do_quit(self, line):
-        """Exit the program. Usage: quit"""
-        return True
-
-    def do_EOF(self, line):
-        """Exit the program. Usage: Ctrl-D"""
-        return True
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel"""
@@ -154,6 +147,15 @@ class HBNBCommand(cmd.Cmd):
         inst = instance[key]
         setattr(inst, args[2], args[3])
         inst.save()
+
+    def do_quit(self, line):
+        """Exit the program. Usage: quit"""
+        return True
+
+    def do_EOF(self, line):
+        """Exit the program. Usage: Ctrl-D"""
+        print("")
+        return True
 
 
 if __name__ == '__main__':
