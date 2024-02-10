@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-from models.engine import FileStorage
+""" __init__ magic method for creating python package."""
+from models.engine.file_storage import FileStorage
+
 
 storage = FileStorage()
 storage.reload()

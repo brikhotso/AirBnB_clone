@@ -16,5 +16,5 @@ class City(BaseModel):
             **kwargs: Dictionary of class instance arguments
         """
         super().__init__(*args, **kwargs)
-        self.state_id = kwargs.get('state_id', '')
-        self.name = kwargs.get('name', '')
+        self.state_id = ""
+        self.name = ""

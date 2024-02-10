@@ -39,9 +39,9 @@ class BaseModel:
                                      self.id, self.__dict__)
 
     def save(self):
+        """updates with current time"""
         from models import FileStorage
         storage = FileStorage()
-        """Updates the attribute updated_at with the current datetime"""
         self.updated_at = datetime.now()
         storage.save()
 
