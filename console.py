@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Defines entry point of the command interpreter."""
+
 import cmd
 import shlex
 from models.base_model import BaseModel
@@ -155,7 +156,6 @@ class HBNBCommand(cmd.Cmd):
 
         print([str(instance) for key, instance in
                storage.all().items() if arg in key])
-
 
     def do_update(self, arg):
         """Updates an instance based on class name and id"""
