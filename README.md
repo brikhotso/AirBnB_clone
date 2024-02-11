@@ -37,7 +37,8 @@ Exit the program. Usage: Ctrl-D
 $
 
 ### How to Use
-Once the console is running, you can use various commands to interact with the application's data model. Some of the supported commands include:
+Once the console is running, you can use various commands to interact with the application's data model.
+Some of the supported commands include:
 
 * create: Create a new instance of a class.
 * show: Display the details of a specific instance.
@@ -45,7 +46,8 @@ Once the console is running, you can use various commands to interact with the a
 * update: Modify the attributes of an instance.
 * all: Display all instances of a class or all instances across all classes.
 * count: Retrieve the number of instances of a class.
-*For detailed usage instructions and examples, refer to the documentation or use the help command within the console.*
+
+_For detailed usage instructions and examples, refer to the documentation or use the help command within the console._
 
 ### Examples
 Here are some examples of using the command interpreter:
