@@ -283,7 +283,12 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = arg.capitalize()
         try:
-            if class_name:
+            if class_name == 'Basemodel':
+                cls = eval('BaseModel')
+                count = len([instance for instance in storage.all().values()
+                            if isinstance(instance, cls)])
+                print(count)
+            else:
                 cls = eval(class_name)
                 count = len([instance for instance in storage.all().values()
                             if isinstance(instance, cls)])
