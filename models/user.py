@@ -5,12 +5,14 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    """User class that inherits from BaseModel"""
-
-    def __init__(self, *args, **kwargs):
-        """Initialize User instance"""
-        super().__init__(*args, **kwargs)
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
+    """User class that inherits from BaseModel
+    Class Attributes:
+        email (str) - User email
+        password (str) - User Password
+        first_name(str) - User first name
+        last_name(str) - User last name
+    """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

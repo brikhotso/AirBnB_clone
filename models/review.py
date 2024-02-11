@@ -5,17 +5,12 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """Review class inheriting from BaseModel"""
-
-    def __init__(self, *args, **kwargs):
-        """
-        Initializes Review instance
-
-        Args:
-            *args: Tuple of class instance arguments
-            **kwargs: Dictionary of class instance arguments
-        """
-        super().__init__(*args, **kwargs)
-        self.place_id = ""
-        self.user_id = ""
-        self.text = ""
+    """Review class inheriting from BaseModel
+    Attributes:
+        place_id (str) - The location/property identification
+        user_id (str) - The user identification
+        text (str) - The message text review
+    """
+    place_id = ""
+    user_id = ""
+    text = ""

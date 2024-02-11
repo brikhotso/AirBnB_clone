@@ -2,6 +2,7 @@
 """A python module: base_model"""
 
 import uuid
+import models
 from datetime import datetime
 
 
@@ -15,8 +16,6 @@ class BaseModel:
         Args: args - Tuple of class instance arguments
               kwargs - Dictionary of class instance arguments
         """
-        from models import FileStorage
-        storage = FileStorage()
         if kwargs:
             if 'created_at' in kwargs:
                 kwargs['created_at'] = datetime.strptime(
@@ -31,7 +30,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Returns the string representation of the BaseModel instance"""
@@ -40,10 +39,8 @@ class BaseModel:
 
     def save(self):
         """updates with current time"""
-        from models import FileStorage
-        storage = FileStorage()
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """
