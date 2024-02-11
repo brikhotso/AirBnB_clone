@@ -9,7 +9,6 @@ This project implements a command-line interface (CLI) for managing a simplified
 * The first abstracted storage engine, File Storage.
 * Unit tests to validate all classes and the storage engine.
 
-...
 ## Command Interpreter
 The command interpreter, or console, allows users to interact with the application's data model. It provides functionalities to create, update, destroy, and manage objects via a command-line interface. Objects are stored and persisted to a file in JSON format.
 
@@ -46,7 +45,7 @@ Once the console is running, you can use various commands to interact with the a
 * update: Modify the attributes of an instance.
 * all: Display all instances of a class or all instances across all classes.
 * count: Retrieve the number of instances of a class.
-_For detailed usage instructions and examples, refer to the documentation or use the help command within the console._
+*For detailed usage instructions and examples, refer to the documentation or use the help command within the console.*
 
 ### Examples
 Here are some examples of using the command interpreter:
