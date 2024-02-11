@@ -52,27 +52,35 @@ Here are some examples of using the command interpreter:
 
 Creating a new user:
 ```Bash
+$ ./console.py
 (hbnb) create User
 49faff9a-6318-451f-87b6-910505c55907
+(hbnb)
 
 Showing details of a user:
 ```Bash
+$ ./console.py
 (hbnb) show User 49faff9a-6318-451f-87b6-910505c55907
 [User] (49faff9a-6318-451f-87b6-910505c55907) {'first_name': 'Betty', 'last_name': 'Bar', 'created_at': datetime.datetime(2017, 9, 28, 21, 12, 19, 611352), 'updated_at': datetime.datetime(2017, 9, 28, 21, 12, 19, 611363), 'password': '63a9f0ea7bb98050796b649e85481845', 'email': 'airbnb@mail.com', 'id': '246c227a-d5c1-403d-9bc7-6a47bb9f0f68'}
+(hbnb)
 
 Updating attributes of a user:
 
 ```Bash
+$ ./console.py
 (hbnb) update User 49faff9a-6318-451f-87b6-910505c55907 first_name "Brenda"
 [User] (49faff9a-6318-451f-87b6-910505c55907) {'first_name': 'Brenda', 'last_name': 'Bar', 'created_at': datetime.datetime(2017, 9, 28, 21, 12, 19, 611352), 'updated_at': datetime.datetime(2017, 9, 28, 21, 12, 19, 611363), 'password': '63a9f0ea7bb98050796b649e85481845', 'email': 'airbnb@mail.com', 'id': '246c227a-d5c1-403d-9bc7-6a47bb9f0f68'}
+(hbnb)
 
 Deleting a User:
+$ ./console.py
 ```Bash
 (hbnb) destroy User 49faff9a-6318-451f-87b6-910505c55907
 (hbnb)
 
 Confirm deleted user:
 ```Bash
+$ ./console.py
 (hbnb) show User 49faff9a-6318-451f-87b6-910505c55907
 ** no instance found **
 (hbnb)
