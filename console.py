@@ -47,7 +47,7 @@ def generate_class_methods(class_name):
 
 def add_class_methods(cls):
     """ add class methods decorator definition"""
-    for class_name in ["User", "Place", "State", "City", "Amenity", "Review"]:
+    for class_name in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
         (create_method, show_method, destroy_method, all_method, update_method,
          count_method) = generate_class_methods(class_name)
         setattr(cls, f"do_create_{class_name.lower()}", create_method)
