@@ -66,7 +66,9 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def default(self, arg):
-        """Called on an input line when the command prefix is not recognized."""
+        """Called on an input line when the command
+        prefix is not recognized.
+        """
         class_methods = {
             'all': 'do_all',
             'create': 'do_create',
@@ -79,7 +81,8 @@ class HBNBCommand(cmd.Cmd):
         parts = arg.split('.')
         if len(parts) == 2 and parts[1].startswith('update'):
             class_name, method_and_params = parts[0], parts[1]
-            if method_and_params.startswith('update(') and method_and_params.endswith(')'):
+            if method_and_params.startswith('update(') \
+                    and method_and_params.endswith(')'):
                 method_name, params = method_and_params.split('(')
                 if method_name in class_methods:
                     class_name = class_name.capitalize()
@@ -94,12 +97,14 @@ class HBNBCommand(cmd.Cmd):
                             getattr(self, method_name)(f"{id_str} {dict_repr}")
                             return
                         else:
-                            match_attr = re.match(r'\"(.+?)\"\s*,\s*\"(.+?)\"\s*,\s*\"(.+?)\"', params)
+                            ptn = r'\"(.+?)\"\s*,\s*\"(.+?)\"\s*,\s*\"(.+?)\"'
+                            match_attr = re.match(ptn, params)
                             if match_attr:
                                 id_str = match_attr.group(1)
                                 attribute_name = match_attr.group(2)
                                 attribute_value = match_attr.group(3)
-                                getattr(self, method_name)(f"{id_str} {attribute_name} {attribute_value}")
+                                getattr(self, method_name)(f"{id_str} \
+                                        {attribute_name} {attribute_value}")
                                 return
                     else:
                         print("** class doesn't exist **")
@@ -293,6 +298,10 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program. Usage: Ctrl-D"""
         print("")
         return True
+
+    def emptyline(self):
+        """Does nothing on empty line + ENTER"""
+        pass
 
 
 if __name__ == '__main__':
