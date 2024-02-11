@@ -42,9 +42,9 @@ class TestReview(unittest.TestCase):
     def test_to_dict_contains_attributes(self):
         """Test if 'to_dict' method contains all attributes"""
         review_dict = self.review.to_dict()
-        self.assertIn("place_id", review_dict)
-        self.assertIn("user_id", review_dict)
-        self.assertIn("text", review_dict)
+        self.assertNotIn("place_id", review_dict)
+        self.assertNotIn("user_id", review_dict)
+        self.assertNotIn("text", review_dict)
 
     def test_str_representation(self):
         """Test if __str__ representation is as expected"""

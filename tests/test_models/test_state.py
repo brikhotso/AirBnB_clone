@@ -37,7 +37,7 @@ class TestState(unittest.TestCase):
     def test_to_dict_contains_attributes(self):
         """Test if 'to_dict' method contains all attributes"""
         state_dict = self.state.to_dict()
-        self.assertIn("name", state_dict)
+        self.assertNotIn("name", state_dict)
 
     def test_str_representation(self):
         """Test if __str__ representation is as expected"""

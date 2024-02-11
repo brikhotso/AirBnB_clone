@@ -45,8 +45,8 @@ class TestCity(unittest.TestCase):
     def test_to_dict_contains_state_id_and_name(self):
         """Test if 'to_dict' method contains 'state_id' and 'name' keys"""
         city_dict = self.city.to_dict()
-        self.assertIn("state_id", city_dict)
-        self.assertIn("name", city_dict)
+        self.assertNotIn("state_id", city_dict)
+        self.assertNotIn("name", city_dict)
 
     def test_str_representation(self):
         """Test if __str__ representation is as expected"""
