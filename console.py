@@ -226,7 +226,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        print([str(instance) for instance in storage.all().values() if isinstance(instance, cls)])
+        print([str(instance) for instance in storage.all().values()
+              if isinstance(instance, cls)])
 
     def do_update(self, arg):
         """Updates an instance based on class name and id"""
@@ -277,11 +278,12 @@ class HBNBCommand(cmd.Cmd):
         class_name = arg.capitalize()
         try:
             cls = eval(class_name)
-            count = len([instance for instance in storage.all().values() if isinstance(instance, cls)])
-
+            count = len([instance for instance in storage.all().values()
+                        if isinstance(instance, cls)])
             print(count)
         except NameError:
             print("** class doesn't exist **")
+            return
 
     def do_quit(self, line):
         """Exit the program. Usage: quit"""
