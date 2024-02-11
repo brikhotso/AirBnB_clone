@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Defines entry point of the command interpreter."""
+
 import cmd
 import shlex
 from models.base_model import BaseModel
@@ -40,7 +41,7 @@ def generate_class_methods(class_name):
 
 
 def add_class_methods(cls):
-    """ add calss methods"""
+    """ add class methods decorator definition"""
     for class_name in ["User", "Place", "State", "City", "Amenity", "Review"]:
         (create_method, show_method, destroy_method,
          all_method, update_method) = generate_class_methods(class_name)
@@ -155,7 +156,6 @@ class HBNBCommand(cmd.Cmd):
 
         print([str(instance) for key, instance in
                storage.all().items() if arg in key])
-
 
     def do_update(self, arg):
         """Updates an instance based on class name and id"""

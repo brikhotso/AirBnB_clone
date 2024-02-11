@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """Tests for class user"""
+
 import unittest
 from models.user import User
 from datetime import datetime
 from models.base_model import BaseModel
+
 
 class TestUser(unittest.TestCase):
     """Unit tests for the User class"""
