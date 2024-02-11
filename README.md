@@ -94,8 +94,8 @@ $ ./console.py
 ```
 
 Deleting a User:
-$ ./console.py
 ```Bash
+$ ./console.py
 (hbnb) destroy User 49faff9a-6318-451f-87b6-910505c55907
 (hbnb)
 ```
@@ -106,4 +106,43 @@ $ ./console.py
 (hbnb) show User 49faff9a-6318-451f-87b6-910505c55907
 ** no instance found **
 (hbnb)
+```
+
+## Advanced usage
+In addition to the above method the console implemented dynamic methods to handle operations based on class names.
+This structure makes the console flexible and easily expandable to accommodate more functionalities in the future.
+
+The method uses the following syntax ,it can be used for methods that require id and or data_structure (eg show_method)
+and those that don't (eg all_method)
+
+```
+<class name>.<method>(<id>)(data_structure)
+````
+
+For example, you can use commands like User.count() and count User
+interchangeably to achieve the same result.
+
+```Bash
+$./console.py
+(hbnb) User.count()
+5
+(hbnb) Count User
+5
+(hbnb) create Place
+d65bc14b-3b6a-44e7-a5d0-e40b50786eca
+(hbnb) place.create()
+2f96465d-04f7-49f0-88a6-96e86e0ff7b7
+(hbnb)
+(hbnb) show Place d65bc14b-3b6a-44e7-a5d0-e40b50786eca
+[Place] (d65bc14b-3b6a-44e7-a5d0-e40b50786eca) {'id': 'd65bc14b-3b6a-44e7-a5d0-e40b50786eca',
+'created_at': datetime.datetime(2024, 2, 11, 12, 18, 44, 679696), 'updated_at':
+datetime.datetime(2024, 2, 11, 12, 18, 44, 679711)}
+(hbnb)
+(hbnb) Place.show("d65bc14b-3b6a-44e7-a5d0-e40b50786eca")
+[Place] (d65bc14b-3b6a-44e7-a5d0-e40b50786eca) {'id': 'd65bc14b-3b6a-44e7-a5d0-e40b50786eca',
+'created_at': datetime.datetime(2024, 2, 11, 12, 18, 44, 679696), 'updated_at':
+datetime.datetime(2024, 2, 11, 12, 18, 44, 679711)}
+(hbnb)
+(hbnb) quit
+$
 ```
