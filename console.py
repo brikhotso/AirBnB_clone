@@ -281,17 +281,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        class_name = arg.capitalize()
+        args = arg.split()
         try:
-            if class_name == 'Basemodel':
-                cls = eval('BaseModel')
-                count = len([instance for instance in storage.all().values()
-                            if isinstance(instance, cls)])
-                print(count)
-            else:
-                cls = eval(class_name)
-                count = len([instance for instance in storage.all().values()
-                            if isinstance(instance, cls)])
+            if args:
+                cls = eval(args[0])
+                stored_instances = storage.all()
+                count = sum(1 for instance in stored_instances.values()
+                            if isinstance(instance, cls))
                 print(count)
         except NameError:
             print("** class doesn't exist **")
