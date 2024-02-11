@@ -47,7 +47,8 @@ def generate_class_methods(class_name):
 
 def add_class_methods(cls):
     """ add class methods decorator definition"""
-    for class_name in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+    obj = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
+    for class_name in obj:
         (create_method, show_method, destroy_method, all_method, update_method,
          count_method) = generate_class_methods(class_name)
         setattr(cls, f"do_create_{class_name.lower()}", create_method)
@@ -282,10 +283,11 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = arg.capitalize()
         try:
-            cls = eval(class_name)
-            count = len([instance for instance in storage.all().values()
-                        if isinstance(instance, cls)])
-            print(count)
+            if class_name:
+                cls = eval(class_name)
+                count = len([instance for instance in storage.all().values()
+                            if isinstance(instance, cls)])
+                print(count)
         except NameError:
             print("** class doesn't exist **")
             return
