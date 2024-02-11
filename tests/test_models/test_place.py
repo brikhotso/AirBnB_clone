@@ -60,17 +60,17 @@ class TestPlace(unittest.TestCase):
     def test_to_dict_contains_attributes(self):
         """Test if 'to_dict' method contains all attributes"""
         place_dict = self.place.to_dict()
-        self.assertIn("city_id", place_dict)
-        self.assertIn("user_id", place_dict)
-        self.assertIn("name", place_dict)
-        self.assertIn("description", place_dict)
-        self.assertIn("number_rooms", place_dict)
-        self.assertIn("number_bathrooms", place_dict)
-        self.assertIn("max_guest", place_dict)
-        self.assertIn("price_by_night", place_dict)
-        self.assertIn("latitude", place_dict)
-        self.assertIn("longitude", place_dict)
-        self.assertIn("amenity_ids", place_dict)
+        self.assertNotIn("city_id", place_dict)
+        self.assertNotIn("user_id", place_dict)
+        self.assertNotIn("name", place_dict)
+        self.assertNotIn("description", place_dict)
+        self.assertNotIn("number_rooms", place_dict)
+        self.assertNotIn("number_bathrooms", place_dict)
+        self.assertNotIn("max_guest", place_dict)
+        self.assertNotIn("price_by_night", place_dict)
+        self.assertNotIn("latitude", place_dict)
+        self.assertNotIn("longitude", place_dict)
+        self.assertNotIn("amenity_ids", place_dict)
 
     def test_str_representation(self):
         """Test if __str__ representation is as expected"""

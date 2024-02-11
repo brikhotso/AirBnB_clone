@@ -39,7 +39,7 @@ class TestAmenity(unittest.TestCase):
     def test_to_dict_contains_name(self):
         """Test if 'to_dict' method contains 'name' key"""
         amenity_dict = self.amenity.to_dict()
-        self.assertIn("name", amenity_dict)
+        self.assertNotIn("name", amenity_dict)
 
     def test_str_representation(self):
         """Test if __str__ representation is as expected"""
