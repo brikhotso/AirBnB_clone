@@ -4,7 +4,7 @@ HTML (HyperText Markup Language) is the standard markup language used to create 
 
 To create an HTML page, you typically start with a basic template that includes the necessary structure. Here's a simple example:
 
-```html
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,10 +31,10 @@ When a browser loads a webpage, it follows a series of steps including parsing t
 
 CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation of a document written in HTML. It defines how elements are displayed, including layout, colors, fonts, and other visual aspects.
 
-To add style to an element using CSS, you can use selectors to target specific elements and apply properties to modify their appearance. For example:
+To add style to an element using CSS, you can use selectors to target specific elements and apply properties to modify their appearance.
+For example:
 
-```css
-Copy code
+```
 h1 {
     color: blue;
     font-size: 24px;
